@@ -9,9 +9,11 @@ import (
 	"github.com/urfave/cli"
 )
 
-func main() {
+func init() {
 	pokemon.Load()
+}
 
+func main() {
 	app := cli.NewApp()
 	app.Name = "pokemon cli"
 	app.Usage = "We can search pokemon info from data"
