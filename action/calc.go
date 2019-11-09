@@ -69,11 +69,29 @@ func IVCalc(c *cli.Context) error {
 }
 
 func calcIvHP(b, e, r, l float64) string {
-	i := (100*r-1000)/l - (2*b + e/4 + 100)
-	return fmt.Sprintf("%.0f - %.0f", math.Floor(i), math.Ceil(i))
+	r1 := r
+	r2 := r + 1 - 0.000001
+	i1 := (100*r1-1000)/l - (2*b + e/4 + 100)
+	i2 := (100*r2-1000)/l - (2*b + e/4 + 100)
+	if math.Floor(i1) < 0 {
+		i1 = 0
+	}
+	if math.Ceil(i2) > 31 {
+		i2 = 31
+	}
+	return fmt.Sprintf("%.0f - %.0f", math.Ceil(i1), math.Floor(i2))
 }
 
 func calcIv(b, e, r, l, c float64) string {
-	i := ((100 * r) / (c * l)) - (500 / l) - (2*b + e/4)
-	return fmt.Sprintf("%.0f - %.0f", math.Floor(i), math.Ceil(i))
+	r1 := r
+	r2 := r + 1 - 0.000001
+	i1 := ((100 * r1) / (c * l)) - (500 / l) - (2*b + e/4)
+	i2 := ((100 * r2) / (c * l)) - (500 / l) - (2*b + e/4)
+	if math.Floor(i1) < 0 {
+		i1 = 0
+	}
+	if math.Ceil(i2) > 31 {
+		i2 = 31
+	}
+	return fmt.Sprintf("%.0f - %.0f", math.Ceil(i1), math.Floor(i2))
 }
