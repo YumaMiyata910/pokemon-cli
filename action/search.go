@@ -36,7 +36,7 @@ func NameSearch(c *cli.Context) error {
 		return nil
 	}
 
-	poke.FPrint()
+	poke.FPrint(output)
 
 	return nil
 }

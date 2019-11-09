@@ -45,7 +45,7 @@ type Pokemon struct {
 	Total          int              `csv:"total"`
 }
 
-func (poke *Pokemon) FPrint() {
+func (poke *Pokemon) FPrint(output string) {
 	fmt.Printf(
 		output,
 		poke.Name,
