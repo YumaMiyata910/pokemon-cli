@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/YumaMiyata910/pokemon-cli/elements"
 	"github.com/gocarina/gocsv"
@@ -67,7 +68,8 @@ func (poke *Pokemon) FPrint(output string) {
 var pokemons []*Pokemon
 
 func Load() {
-	file, err := os.Open("./pokemon/pokemon_status.csv")
+	gopath := os.Getenv("GOPATH")
+	file, err := os.Open(filepath.Join(gopath, "/src/github.com/YumaMiyata910/pokemon-cli/pokemon/pokemon_status.csv"))
 	if err != nil {
 		log.Fatal(err)
 	}
