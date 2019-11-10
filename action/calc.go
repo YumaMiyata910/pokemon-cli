@@ -153,11 +153,11 @@ func calcIv(b, e, r, l, c float64) string {
 }
 
 func calcRvHP(b, e, i, l float64) string {
-	r := (b*2+i+e/4)*(l/100) + 10 + l
+	r := math.Floor((b*2+i+e/4))*(l/100) + 10 + l
 	return fmt.Sprintf("%.0f", math.Floor(r))
 }
 
 func calcRv(b, e, i, l, c float64) string {
-	r := ((b*2+i+e/4)*(l/100) + 5) * c
+	r := math.Floor((math.Floor((b*2+i+e/4))*(l/100) + 5)) * c
 	return fmt.Sprintf("%.0f", math.Floor(r))
 }
