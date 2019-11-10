@@ -71,3 +71,43 @@ func TestCalcIv(t *testing.T) {
 		}
 	}
 }
+
+func TestCalcRv(t *testing.T) {
+	testData := []struct {
+		name       string
+		target     string
+		char       string
+		ivVal      string
+		effortVal  string
+		level      string
+		statusType constant.StatusType
+		rv         string
+	}{
+		{"ハピナス", "H", "おだやか", "31", "252", "50", constant.HP, "362"},
+		{"ミュウ", "A", "いじっぱり", "31", "252", "50", constant.Attack, "167"},
+		{"ミュウ", "A", "いじっぱり", "31", "252", "100", constant.Attack, "328"},
+		{"ミュウ", "A", "わんぱく", "31", "252", "50", constant.Attack, "152"},
+		{"ミュウ", "C", "いじっぱり", "31", "0", "50", constant.SpecialAttack, "108"},
+		{"ミュウ", "C", "いじっぱり", "14", "0", "50", constant.SpecialAttack, "100"},
+		{"ミュウ", "D", "いじっぱり", "18", "120", "70", constant.SpecialDefence, "178"},
+		{"ミュウ", "D", "ようき", "0", "0", "50", constant.SpecialDefence, "105"},
+		{"ミュウ", "S", "ようき", "0", "252", "50", constant.Speed, "149"},
+		{"ミュウ", "S", "おくびょう", "31", "252", "100", constant.Speed, "328"},
+	}
+
+	for i, d := range testData {
+		c := testcli.Command("pokemon-cli", "calc", "rv", "--target", d.target, d.name, d.char, d.ivVal, d.effortVal, d.level)
+		c.Run()
+		if !c.Success() {
+			t.Fatalf("case:【%d】 Expected to succeed, but failed: %s", i, c.Error())
+		}
+
+		if !c.StdoutContains(string(d.statusType)) {
+			t.Fatalf("case:【%d】 Expected %q to contain %q", i, c.Stdout(), d.statusType)
+		}
+
+		if !c.StdoutContains(d.rv) {
+			t.Fatalf("case:【%d】 Expected %q to contain %q", i, c.Stdout(), d.rv)
+		}
+	}
+}
