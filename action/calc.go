@@ -68,6 +68,62 @@ func IVCalc(c *cli.Context) error {
 	return nil
 }
 
+func RVCalc(c *cli.Context) error {
+	if c.NArg() < 5 {
+		return fmt.Errorf("There are not enough arguments. Require 5, but take %d", c.NArg())
+	}
+	name := c.Args().Get(0)
+	charStr := c.Args().Get(1)
+	ivStr := c.Args().Get(2)
+	effortStr := c.Args().Get(3)
+	levelStr := c.Args().Get(4)
+
+	poke := pokemon.GetByName(name)
+
+	var baseInt int
+	var target constant.StatusType
+	var output string
+
+	t := c.String("target")
+	switch {
+	case lib.StringContains([]string{"H", "h"}, t):
+		target = constant.HP
+		baseInt = poke.HitPoint
+	case lib.StringContains([]string{"A", "a"}, t):
+		target = constant.Attack
+		baseInt = poke.Attack
+	case lib.StringContains([]string{"B", "b"}, t):
+		target = constant.Defence
+		baseInt = poke.Defense
+	case lib.StringContains([]string{"C", "c"}, t):
+		target = constant.SpecialAttack
+		baseInt = poke.SpecialAttack
+	case lib.StringContains([]string{"D", "d"}, t):
+		target = constant.SpecialDefence
+		baseInt = poke.SpecialDefense
+	case lib.StringContains([]string{"S", "s"}, t):
+		target = constant.Speed
+		baseInt = poke.Speed
+	default:
+		log.Fatalf("Command failuer. Require target flag {H|A|B|C|D|S}. But specified %s", t)
+	}
+
+	baseVal := float64(baseInt)
+	effortVal := lib.String2Float(effortStr)
+	ivVal := lib.String2Float(ivStr)
+	level := lib.String2Float(levelStr)
+	charVal := constant.GetCollectionVal(charStr, target)
+	if target == "HP" {
+		output = calcRvHP(baseVal, effortVal, ivVal, level)
+	} else {
+		output = calcRv(baseVal, effortVal, ivVal, level, charVal)
+	}
+
+	fmt.Printf("%s: %s\n", target, output)
+
+	return nil
+}
+
 func calcIvHP(b, e, r, l float64) string {
 	r1 := r
 	r2 := r + 1 - 0.000001
@@ -94,4 +150,14 @@ func calcIv(b, e, r, l, c float64) string {
 		i2 = 31
 	}
 	return fmt.Sprintf("%.0f - %.0f", math.Ceil(i1), math.Floor(i2))
+}
+
+func calcRvHP(b, e, i, l float64) string {
+	r := (b*2+i+e/4)*(l/100) + 10 + l
+	return fmt.Sprintf("%.0f", math.Floor(r))
+}
+
+func calcRv(b, e, i, l, c float64) string {
+	r := ((b*2+i+e/4)*(l/100) + 5) * c
+	return fmt.Sprintf("%.0f", math.Floor(r))
 }
