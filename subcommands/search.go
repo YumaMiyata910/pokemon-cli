@@ -1,11 +1,11 @@
-package commands
+package subcommands
 
 import (
-	"github.com/ymiyata910/pokemon-cli/action"
 	"github.com/urfave/cli"
+	"github.com/ymiyata910/pokemon-cli/action"
 )
 
-func setSearch() cli.Command {
+func SetSearch() cli.Command {
 	return cli.Command{
 		Name:  "search",
 		Usage: "search pokemon from data",
