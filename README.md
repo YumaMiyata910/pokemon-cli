@@ -3,7 +3,7 @@
 
 ## Install
 ```bash
-go get -u github.com/YumaMiyata910/pokemon-cli
+go get -u github.com/ymiyata910/pokemon-cli
 ```
 
 ## Usage

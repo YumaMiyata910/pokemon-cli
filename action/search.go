@@ -3,7 +3,7 @@ package action
 import (
 	"fmt"
 
-	"github.com/YumaMiyata910/pokemon-cli/pokemon"
+	"github.com/ymiyata910/pokemon-cli/pokemon"
 	"github.com/urfave/cli"
 )
 

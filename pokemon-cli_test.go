@@ -3,7 +3,7 @@ package main_test
 import (
 	"testing"
 
-	"github.com/YumaMiyata910/pokemon-cli/constant"
+	"github.com/ymiyata910/pokemon-cli/constant"
 	"github.com/rendon/testcli"
 )
 

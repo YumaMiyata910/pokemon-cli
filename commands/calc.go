@@ -1,7 +1,7 @@
 package commands
 
 import (
-	"github.com/YumaMiyata910/pokemon-cli/action"
+	"github.com/ymiyata910/pokemon-cli/action"
 	"github.com/urfave/cli"
 )
 
