@@ -5,9 +5,9 @@ import (
 	"log"
 	"math"
 
-	"github.com/YumaMiyata910/pokemon-cli/constant"
-	"github.com/YumaMiyata910/pokemon-cli/lib"
-	"github.com/YumaMiyata910/pokemon-cli/pokemon"
+	"github.com/ymiyata910/pokemon-cli/constant"
+	"github.com/ymiyata910/pokemon-cli/lib"
+	"github.com/ymiyata910/pokemon-cli/pokemon"
 
 	"github.com/urfave/cli"
 )

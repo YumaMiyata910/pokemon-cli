@@ -4,9 +4,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/YumaMiyata910/pokemon-cli/commands"
-	"github.com/YumaMiyata910/pokemon-cli/pokemon"
 	"github.com/urfave/cli"
+	"github.com/ymiyata910/pokemon-cli/commands"
+	"github.com/ymiyata910/pokemon-cli/pokemon"
 )
 
 func init() {
