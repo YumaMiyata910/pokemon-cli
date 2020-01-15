@@ -1,11 +1,11 @@
-package commands
+package subcommands
 
 import (
-	"github.com/ymiyata910/pokemon-cli/action"
 	"github.com/urfave/cli"
+	"github.com/ymiyata910/pokemon-cli/action"
 )
 
-func setCalc() cli.Command {
+func SetCalc() cli.Command {
 	return cli.Command{
 		Name:  "calc",
 		Usage: "calc pokemon values",
